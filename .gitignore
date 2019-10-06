@@ -1,2 +1,12 @@
 target/classes/org/tron/trongrid/ContractEventTriggerEntity.class
 target/classes/org/tron/trongrid/InternalTransactionPojo.class
+target/classes
+target/maven-archiver
+target/maven-status
+target/*.jar
+target/*.original
+.factorypath
+.project
+nohup.out
+.classpath
+.settings

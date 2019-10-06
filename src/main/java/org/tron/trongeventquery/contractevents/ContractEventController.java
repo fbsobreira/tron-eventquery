@@ -213,7 +213,8 @@ public class ContractEventController {
   public List<ContractEventTriggerEntity> filterevent(
       @PathVariable String contractAddress,
       @PathVariable String eventName,
-      @RequestParam(value = "since", required = false, defaultValue = "0") Long timestamp,
+      @RequestParam(value = "since", required = false, defaultValue = "0") Long timestampSince,
+      @RequestParam(value = "until", required = false, defaultValue = "0") Long timestampUntil,
       @RequestParam(value = "block", required = false, defaultValue = "-1") long blocknum,
       @RequestParam(value = "limit", required = false, defaultValue = "25") int limit,
       @RequestParam(value = "sort", required = false, defaultValue = "-timeStamp") String sort,
@@ -222,7 +223,12 @@ public class ContractEventController {
 
     query.setContractAddress(contractAddress);
     query.setEventName(eventName);
-    query.setTimestampGreaterEqual(timestamp);
+    if (timestampUntil == 0){
+      query.setTimestampGreaterEqual(timestampSince);
+    }else if (timestampSince < timestampUntil) {
+      query.setTimestampBetween(timestampSince, timestampUntil);
+    }
+    
     if (blocknum != -1) {
       query.setBlockNum(blocknum);
     }

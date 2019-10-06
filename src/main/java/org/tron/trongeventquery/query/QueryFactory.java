@@ -88,6 +88,10 @@ public class QueryFactory {
     this.query.addCriteria(Criteria.where("timeStamp").gte(timestamp));
   }
 
+  public void setTimestampBetween(long timestampSince, long timestampUntil) {
+    this.query.addCriteria(Criteria.where("timeStamp").gte(timestampSince).lt(timestampUntil));
+  }
+
   public void setUniqueIdEqual(String uniqueId) {
     this.query.addCriteria(Criteria.where("uniqueId").is(uniqueId));
   }
